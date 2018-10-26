@@ -57,7 +57,7 @@ public class GameBuilder extends VBox {
         ICON_LOOP:
         for(Icon icon1: icons){
             if(icon.equals(icon1)){
-                
+
                 break ICON_LOOP;
             }
         }
