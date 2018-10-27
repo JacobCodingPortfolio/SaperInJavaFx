@@ -1,8 +1,10 @@
 package pl.com.game;
 
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
@@ -21,11 +23,14 @@ public class Game extends Application {
     public void start(Stage primaryStage) throws Exception {
         game = Game.this;
         this.gameBuilder = new GameBuilder();
+        Util.setElementSize(this.gameBuilder, Util.SCENE_WIDTH, Util.SCENE_HEIGHT);
         this.mainContent = new AnchorPane();
         this.mainContent.getChildren().add(gameBuilder);
         this.stage = primaryStage;
-        this.scene = new Scene(mainContent);
+        this.scene = new Scene(mainContent, Util.SCENE_WIDTH, Util.SCENE_HEIGHT);
+        this.stage.setResizable(false);
         this.stage.setScene(this.scene);
+        this.stage.sizeToScene();
         this.stage.show();
     }
 

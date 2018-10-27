@@ -3,6 +3,7 @@ package pl.com.game;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
@@ -20,9 +21,9 @@ public class MenuBar extends AnchorPane {
     @FXML
     private Button newGame;
     @FXML
-    private TextField xContainer;
+    private ComboBox levelMenu;
     @FXML
-    private TextField yContainer;
+    private ComboBox sizeMenu;
     @FXML
     private TextField logContainer;
 
@@ -38,13 +39,41 @@ public class MenuBar extends AnchorPane {
             e.printStackTrace();
         }
         this.getChildren().add(mainAnchorMenu);
+        this.fillComboBoxes();
+    }
+
+    private void fillComboBoxes() {
+        //Remove all objects
+        this.levelMenu.getItems().removeAll();
+        this.sizeMenu.getItems().removeAll();
+
+        for(Util.GameLevel level: Util.GameLevel.values()){
+            levelMenu.getItems().add(level);
+        }
+
+        for(Util.GameSize size: Util.GameSize.values()){
+            sizeMenu.getItems().add(size);
+        }
     }
 
     public void initAction(InitializeGameAction initializeGameAction){
         newGame.setOnMouseClicked(event ->{
             try {
-                initializeGameAction.initNewGameAction(xContainer.getText(), yContainer.getText());
-            } catch (IOException e) {
+                if(levelMenu.getValue() != null && sizeMenu.getValue() != null){
+                    Util.GameSize size = (Util.GameSize) sizeMenu.getValue();
+                    Util.GameLevel level = (Util.GameLevel) levelMenu.getValue();
+                    Double bombCountDouble = (level.getBombsProportion() * (size.getX() * size.getY()));
+                    Integer bombCount = bombCountDouble.intValue();
+                    initializeGameAction.initNewGameAction(size.getX(), size.getY(), bombCount);
+                    logAction(() -> {
+                        return "Zbudowano grę :) Powodzenia!";
+                    });
+                } else {
+                    logAction(() -> {
+                        return "Wybierz opcje ...";
+                    });
+                }
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         });
@@ -56,7 +85,7 @@ public class MenuBar extends AnchorPane {
 
     @FunctionalInterface
     public interface InitializeGameAction{
-        void initNewGameAction(String x, String y) throws IOException;
+        void initNewGameAction(Integer x, Integer y, Integer bombs) throws IOException;
     }
 
     @FunctionalInterface

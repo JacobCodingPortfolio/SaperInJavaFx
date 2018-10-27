@@ -42,13 +42,7 @@ public class Icon extends AnchorPane {
     }
 
     private void setBomb() {
-        Random random = new Random();
-        Long i = random.nextLong();
-        if((i % probably) == 0){
-            this.bomb = true;
-        } else {
-            this.bomb = false;
-        }
+        this.bomb = true;
     }
 
     public Button getBombButton() {

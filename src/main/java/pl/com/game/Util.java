@@ -3,7 +3,7 @@ package pl.com.game;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import org.apache.commons.lang3.reflect.FieldUtils;
+import javafx.scene.layout.Region;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -14,9 +14,13 @@ import java.util.List;
  */
 public class Util {
 
-   public static final Integer PROBABLY = 5;
+    public static final Double SCENE_HEIGHT = 500.0;
+    public static final Double SCENE_WIDTH = 500.0;
 
-   public static void initializeFxControls(Class<? extends Node> classWithNodes, Object instance, FXMLLoader loader) throws NoSuchFieldException, IllegalAccessException {
+    public static final Integer PROBABLY = 5;
+    public static final Integer ICON_SIZE_PIXEL_SQUARE = 25;
+
+    public static void initializeFxControls(Class<? extends Node> classWithNodes, Object instance, FXMLLoader loader) throws NoSuchFieldException, IllegalAccessException {
 
        Field[] fields = classWithNodes.getDeclaredFields();
        List<String> stringFields = new ArrayList<String>();
@@ -38,8 +42,55 @@ public class Util {
 
    }
 
-   public static Object getElementById(String key, FXMLLoader loader){
+    public static Object getElementById(String key, FXMLLoader loader){
        return loader.getNamespace().get(key);
+   }
+
+    public static void setElementSize(Region region, Double width, Double height){
+       region.setMinSize(width, height);
+       region.setPrefSize(width, height);
+       region.setMaxSize(width, height);
+   }
+
+
+
+   public enum GameLevel{
+        HI(0.3),
+        MED(0.2),
+        LOW(0.1);
+
+        private Double bombsProportion;
+
+       GameLevel(Double bombsProportion) {
+           this.bombsProportion = bombsProportion;
+       }
+
+       public Double getBombsProportion() {
+           return bombsProportion;
+       }
+
+   }
+
+   public enum GameSize{
+        BIG(16, 16),
+        MED(10, 10),
+        SMALL(7, 7);
+
+        private Integer x;
+        private Integer y;
+
+       GameSize(Integer x, Integer y) {
+           this.x = x;
+           this.y = y;
+       }
+
+       public Integer getX() {
+           return x;
+       }
+
+       public Integer getY() {
+           return y;
+       }
    }
 
 }
