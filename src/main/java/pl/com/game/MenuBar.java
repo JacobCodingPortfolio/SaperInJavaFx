@@ -66,7 +66,7 @@ public class MenuBar extends AnchorPane {
                     Integer bombCount = bombCountDouble.intValue();
                     initializeGameAction.initNewGameAction(size.getX(), size.getY(), bombCount);
                     logAction(() -> {
-                        return "Zbudowano grę :) Powodzenia!";
+                        return "Rozpoczęto grę :) Powodzenia!";
                     });
                 } else {
                     logAction(() -> {

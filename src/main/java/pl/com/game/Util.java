@@ -16,9 +16,8 @@ public class Util {
 
     public static final Double SCENE_HEIGHT = 500.0;
     public static final Double SCENE_WIDTH = 500.0;
-
-    public static final Integer PROBABLY = 5;
-    public static final Integer ICON_SIZE_PIXEL_SQUARE = 25;
+    public static final Integer ZERO = 0;
+    public static final Integer ICON_SIZE_PIXEL_SQUARE = 30;
 
     public static void initializeFxControls(Class<? extends Node> classWithNodes, Object instance, FXMLLoader loader) throws NoSuchFieldException, IllegalAccessException {
 
@@ -52,9 +51,7 @@ public class Util {
        region.setMaxSize(width, height);
    }
 
-
-
-   public enum GameLevel{
+    public enum GameLevel{
         HI(0.3),
         MED(0.2),
         LOW(0.1);
@@ -71,8 +68,8 @@ public class Util {
 
    }
 
-   public enum GameSize{
-        BIG(16, 16),
+    public enum GameSize{
+        BIG(14, 14),
         MED(10, 10),
         SMALL(7, 7);
 

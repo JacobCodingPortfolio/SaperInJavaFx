@@ -1,13 +1,11 @@
 package pl.com.game;
 
-import com.sun.scenario.effect.impl.prism.PrImage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
-import java.util.Random;
 
 public class Icon extends AnchorPane {
 
@@ -22,9 +20,8 @@ public class Icon extends AnchorPane {
     private Integer x;
     private Integer y;
 
-    private Integer probably = Util.PROBABLY;
-
     private Boolean bomb;
+    private boolean unHide;
 
     public Icon() throws IOException {
         String s = "/" + Icon.this.getClass().getSimpleName() + ".fxml";
@@ -38,11 +35,20 @@ public class Icon extends AnchorPane {
             e.printStackTrace();
         }
         this.getChildren().add(bombPane);
-        this.setBomb();
     }
 
-    private void setBomb() {
+    public void setBomb() {
         this.bomb = true;
+    }
+
+    public Boolean hasBomb(){
+        if(bomb == null){
+            return false;
+        } else if(bomb.equals(false)){
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public Button getBombButton() {
@@ -54,10 +60,36 @@ public class Icon extends AnchorPane {
         this.y = y;
     }
 
-    public String getPosition(){
-        return "X: " + String.valueOf(x) + ", Y: " + String.valueOf(y);
+    public Boolean isCurrentPosition(Integer x, Integer y){
+        if(this.x.equals(x) && this.y.equals(y)){
+            return true;
+        } else {
+            return false;
+        }
     }
 
+    public void disableButton(){
+        bombButton.setDisable(true);
+    }
 
+    public Integer getX() {
+        return x;
+    }
+
+    public Integer getY() {
+        return y;
+    }
+
+    public boolean isUnHide() {
+        return unHide;
+    }
+
+    public void setUnHide(boolean unHide) {
+        this.unHide = unHide;
+    }
+
+    public String getItemPosString(){
+        return "X: " + String.valueOf(this.x) + ", Y: " + String.valueOf(this.y);
+    }
 
 }
