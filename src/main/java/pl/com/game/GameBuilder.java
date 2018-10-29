@@ -50,6 +50,7 @@ public class GameBuilder extends BorderPane {
                             e.printStackTrace();
                         }
                         if(checkWinGame()){
+                            gameEnd = true;
                             this.menuBar.logAction(() -> "Wygrałeś :) Super :)");
                         }
                     });
